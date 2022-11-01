@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Iconica
+//
+// SPDX-License-Identifier: BSD-3-Clause
+
 library iconica_utilities.bidirectional_sorter;
 
 import 'package:flutter_iconica_utilities/src/biderectional_sorter/enum.dart';
