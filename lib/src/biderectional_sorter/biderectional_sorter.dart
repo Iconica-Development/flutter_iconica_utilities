@@ -7,6 +7,8 @@ library iconica_utilities.bidirectional_sorter;
 import 'package:flutter_iconica_utilities/src/biderectional_sorter/enum.dart';
 import 'package:flutter_iconica_utilities/src/biderectional_sorter/sorter.dart';
 
+export 'package:flutter_iconica_utilities/src/biderectional_sorter/sorter.dart';
+
 /// Generic sort method, allow sorting of list with primitives or complex types.
 /// Uses [SortDirection] to determine the direction, either Ascending or Descending,
 /// Gets called on [List] toSort of type [T] which cannot be shorter than 2.
