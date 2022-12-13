@@ -15,3 +15,6 @@
 ## 0.0.4
 
 - Add multisort to Bidirectional sorter
+
+## 0.0.5
+- Export Sort instruction
