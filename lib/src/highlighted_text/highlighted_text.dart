@@ -25,7 +25,6 @@ extension Highlight on Text {
     /// List of string which are going to be painted in the highlightStyle
     /// [AssertionError] gets thrown if the list is empty
     List<String> highlights, {
-
     /// Required style, highlighted words get painted in this style
     required TextStyle highlightStyle,
 
@@ -38,6 +37,7 @@ extension Highlight on Text {
       highlighted: highlights,
       highlightedTextStyle: highlightStyle,
       mainStyle: mainStyle ?? style,
+      textAlign: textAlign,
     );
   }
 }

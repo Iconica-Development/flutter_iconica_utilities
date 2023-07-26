@@ -9,12 +9,14 @@ class HighlightedText extends StatelessWidget {
   final TextStyle? mainStyle;
   final List<String> highlighted;
   final TextStyle? highlightedTextStyle;
+  final TextAlign? textAlign;
   const HighlightedText({
     Key? key,
     required this.text,
     required this.mainStyle,
     required this.highlighted,
     required this.highlightedTextStyle,
+    this.textAlign,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class HighlightedText extends StatelessWidget {
           ]
         ]
       ]),
+      textAlign: textAlign,
       key: const Key("highlighted"),
     );
   }

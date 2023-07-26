@@ -18,3 +18,6 @@
 
 ## 0.0.5
 - Export Sort instruction
+
+## 0.0.6
+- Add textalign for highlighted text
