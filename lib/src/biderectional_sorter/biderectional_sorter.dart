@@ -44,7 +44,6 @@ void sort<T>(
 
   /// Incoming list, which gets sorted
   List<T> toSort, [
-
   /// Optional comparable, which is only necessary for complex types
   SortFieldGetter<T>? sortValueCallback,
 ]) {
