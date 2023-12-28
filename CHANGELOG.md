@@ -1,3 +1,12 @@
+## 0.0.7
+- add map serialization for objects
+- add datetime parsing from map
+- add double parsing from map
+- add date comparison extension
+- add crossfade boolean toggle extension
+- increase dart version to 3.0.0
+- change order of changelog to be latest at the top
+
 ## 0.0.6
 - Add textalign for highlighted text
 
