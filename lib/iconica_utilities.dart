@@ -8,5 +8,6 @@ export 'package:flutter_iconica_utilities/src/biderectional_sorter/biderectional
 export 'package:flutter_iconica_utilities/src/biderectional_sorter/enum.dart';
 export 'package:flutter_iconica_utilities/src/highlighted_text/highlighted_text.dart';
 export 'package:flutter_iconica_utilities/src/date_extension/datetime_comparison.dart';
+export 'package:flutter_iconica_utilities/src/date_extension/datetime_formatter.dart';
 export 'package:flutter_iconica_utilities/src/serialization/double_from_map.dart';
 export 'package:flutter_iconica_utilities/src/crossfade_toggle/crossfade_toggle.dart';

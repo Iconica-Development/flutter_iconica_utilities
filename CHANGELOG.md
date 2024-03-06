@@ -1,3 +1,6 @@
+## 0.0.8
+- add datetime formatters
+
 ## 0.0.7
 - add map serialization for objects
 - add datetime parsing from map
