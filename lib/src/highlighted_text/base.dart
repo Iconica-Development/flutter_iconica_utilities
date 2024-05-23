@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HighlightedText extends StatelessWidget {
@@ -10,6 +11,7 @@ class HighlightedText extends StatelessWidget {
   final List<String> highlighted;
   final TextStyle? highlightedTextStyle;
   final TextAlign? textAlign;
+  final VoidCallback? onTapRecognizer;
   const HighlightedText({
     Key? key,
     required this.text,
@@ -17,6 +19,7 @@ class HighlightedText extends StatelessWidget {
     required this.highlighted,
     required this.highlightedTextStyle,
     this.textAlign,
+    this.onTapRecognizer,
   }) : super(key: key);
 
   @override
@@ -26,7 +29,12 @@ class HighlightedText extends StatelessWidget {
       TextSpan(children: [
         for (String s in brokenDown) ...[
           if (highlighted.contains(s)) ...[
-            TextSpan(text: s, style: highlightedTextStyle),
+            TextSpan(
+                text: s,
+                style: highlightedTextStyle,
+                recognizer: onTapRecognizer != null
+                    ? getTapRecognizer(onTapRecognizer!)
+                    : null),
           ] else ...[
             TextSpan(text: s, style: mainStyle)
           ]
@@ -68,5 +76,11 @@ class HighlightedText extends StatelessWidget {
           remaining.substring(nextIndex + highlightedWord.length),
           cumulative: cumulative);
     }
+  }
+
+  GestureRecognizer getTapRecognizer(VoidCallback onTap) {
+    var rec = TapGestureRecognizer();
+    rec.onTap = onTap;
+    return rec;
   }
 }
