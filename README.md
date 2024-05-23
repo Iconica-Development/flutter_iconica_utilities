@@ -45,7 +45,7 @@ print(listToSort)
 
 ## Highlighted text
 
-Generic implementation of the highlighted text widget, can be used as an extension of the regular text widget. Highlighted style, mainstyle and highlight matchers can be given as parameters.
+Generic implementation of the highlighted text widget, can be used as an extension of the regular text widget. Highlighted style, mainstyle and highlight matchers can be given as parameters. A fourth parameter is provided to add a tap recognizer called "onTapRecognizer" which takes a VoidCallback.
 
 ### Usage
 

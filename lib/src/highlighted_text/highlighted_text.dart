@@ -28,6 +28,9 @@ extension Highlight on Text {
     /// Required style, highlighted words get painted in this style
     required TextStyle highlightStyle,
 
+    /// Ability to set a tapRecognizer on the highlighted text.
+    VoidCallback? onTapRecognizer,
+
     /// Optional style, if no style given the inherited style is used. Words that are NOT highlighted get painted in this style.
     TextStyle? mainStyle,
   }) {
@@ -38,6 +41,7 @@ extension Highlight on Text {
       highlightedTextStyle: highlightStyle,
       mainStyle: mainStyle ?? style,
       textAlign: textAlign,
+      onTapRecognizer: onTapRecognizer,
     );
   }
 }
