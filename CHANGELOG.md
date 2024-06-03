@@ -1,3 +1,9 @@
+## 0.2.0
+- add multiHighlight for highlighting multiple pieces of text with different parameters
+
+## 0.1.0
+- add tap recognizer for highligh function
+
 ## 0.0.7
 - add map serialization for objects
 - add datetime parsing from map

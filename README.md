@@ -61,6 +61,27 @@ Text('This is a test').highlight(highlightMatchers,
   ),
 ```
 
+```dart
+import 'package:iconica_utilities/iconica_utilities.dart';
+
+// This creates a widget showing the text, "This is a red, and this blue", where the word red is colored red and the word is colored blue.
+Text('This is a red, and this blue').multiHighlight([
+    HighlightModel(
+      ['red'],
+      highlightStyle: TextStyle(
+        color: Colors.red,
+      ),
+    ),
+    HighlightModel(
+      ['blue'],
+      highlightStyle: TextStyle(
+        color: Colors.blue,
+      ),
+    ),         
+  ],
+),
+```
+
 ## Contributing
 
 When contributing create a branch and send in a pull-request. This request will then be reviewed and merged.

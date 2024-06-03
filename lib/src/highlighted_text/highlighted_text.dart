@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_iconica_utilities/src/highlighted_text/base.dart';
+import 'package:flutter_iconica_utilities/src/highlighted_text/highlight_model.dart';
 
 extension Highlight on Text {
   /// Generic implementation of highlighted text. this is an extension of the regular [Text] widget.
@@ -42,6 +43,22 @@ extension Highlight on Text {
       mainStyle: mainStyle ?? style,
       textAlign: textAlign,
       onTapRecognizer: onTapRecognizer,
+    );
+  }
+
+  multiHighlight(
+    /// List of Highlights which are going to be painted in the highlightStyle
+    /// [AssertionError] gets thrown if the list is empty
+    List<HighlightModel> highlights, {
+    /// Optional style, if no style given the inherited style is used. Words that are NOT highlighted get painted in this style.
+    TextStyle? mainStyle,
+  }) {
+    assert(highlights.isNotEmpty);
+    return MultiHighlightedText(
+      text: data ?? '',
+      highlights: highlights,
+      mainStyle: mainStyle ?? style,
+      textAlign: textAlign,
     );
   }
 }
