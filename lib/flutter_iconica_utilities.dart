@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
-library iconica_utilities;
+library flutter_iconica_utilities;
 
 export 'package:flutter_iconica_utilities/src/biderectional_sorter/biderectional_sorter.dart';
 export 'package:flutter_iconica_utilities/src/biderectional_sorter/enum.dart';

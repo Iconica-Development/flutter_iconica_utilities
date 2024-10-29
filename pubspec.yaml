@@ -1,7 +1,7 @@
 name: flutter_iconica_utilities
 description: Iconica utility package with all kinds of utility functions
 version: 0.3.0
-homepage: iconica.nl
+homepage: https://iconica.nl
 
 publish_to: https://forgejo.internal.iconica.nl/api/packages/internal/pub
 

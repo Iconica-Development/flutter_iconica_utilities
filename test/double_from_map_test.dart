@@ -1,4 +1,4 @@
-import 'package:flutter_iconica_utilities/iconica_utilities.dart';
+import 'package:flutter_iconica_utilities/flutter_iconica_utilities.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
