@@ -1,3 +1,6 @@
+## 0.3.0
+- add map method to cast or return null
+
 ## 0.2.0
 - add multiHighlight for highlighting multiple pieces of text with different parameters
 
