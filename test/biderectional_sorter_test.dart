@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_iconica_utilities/iconica_utilities.dart';
+import 'package:flutter_iconica_utilities/flutter_iconica_utilities.dart';
 
 import 'test_object.dart';
 

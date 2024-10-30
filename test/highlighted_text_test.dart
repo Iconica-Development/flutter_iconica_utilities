@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_iconica_utilities/iconica_utilities.dart';
+import 'package:flutter_iconica_utilities/flutter_iconica_utilities.dart';
 import 'package:flutter_iconica_utilities/src/highlighted_text/base.dart';
 
 List<TextSpan> retrieveListOfSpans(WidgetTester tester) {
