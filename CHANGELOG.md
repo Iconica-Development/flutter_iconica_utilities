@@ -1,3 +1,6 @@
+## 0.4.0
+- add a scroll body fade widget to fade out the edges of a scrollable view
+
 ## 0.3.0
 - add map method to cast or return null
 

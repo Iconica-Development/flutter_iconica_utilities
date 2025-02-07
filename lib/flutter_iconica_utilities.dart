@@ -13,3 +13,4 @@ export 'package:flutter_iconica_utilities/src/serialization/double_from_map.dart
 export 'package:flutter_iconica_utilities/src/crossfade_toggle/crossfade_toggle.dart';
 export 'package:flutter_iconica_utilities/src/serialization/map_data.dart';
 export 'package:flutter_iconica_utilities/src/serialization/cast_from_map.dart';
+export 'package:flutter_iconica_utilities/src/scroll_body_fade/scroll_body_fade.dart';
