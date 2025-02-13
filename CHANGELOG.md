@@ -1,3 +1,6 @@
+## 0.5.0
+- add date clamping
+
 ## 0.4.0
 - add a scroll body fade widget to fade out the edges of a scrollable view
 
