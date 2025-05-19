@@ -2,53 +2,71 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_iconica_utilities/src/highlighted_text/highlight_model.dart';
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
+import "package:flutter_iconica_utilities/src/highlighted_text/highlight_model.dart";
 
+/// Widget for highlighting parts of a text.
 class HighlightedText extends StatelessWidget {
-  final String text;
-  final TextStyle? mainStyle;
-  final List<String> highlighted;
-  final TextStyle? highlightedTextStyle;
-  final TextAlign? textAlign;
-  final VoidCallback? onTapRecognizer;
+  /// [HighlightedText] constructor
   const HighlightedText({
-    Key? key,
     required this.text,
     required this.mainStyle,
     required this.highlighted,
     required this.highlightedTextStyle,
+    super.key,
     this.textAlign,
     this.onTapRecognizer,
-  }) : super(key: key);
+  });
+
+  /// The text
+  final String text;
+
+  /// The default style
+  final TextStyle? mainStyle;
+
+  /// The values in the text that are highlighted
+  final List<String> highlighted;
+
+  /// The style used for highlighting
+  final TextStyle? highlightedTextStyle;
+
+  /// The text alignment
+  final TextAlign? textAlign;
+
+  /// The callback fired when a highlighted piece of text is pressed
+  final VoidCallback? onTapRecognizer;
 
   @override
   Widget build(BuildContext context) {
-    List<String> brokenDown = _getHighlightedList(text);
+    var brokenDown = _getHighlightedList(text);
+    var textSpans = brokenDown.map((substring) {
+      if (highlighted.contains(substring)) {
+        return TextSpan(
+          text: substring,
+          style: highlightedTextStyle,
+          recognizer: onTapRecognizer != null
+              ? _getTapRecognizer(onTapRecognizer!)
+              : null,
+        );
+      }
+
+      return TextSpan(
+        text: substring,
+        style: mainStyle,
+      );
+    }).toList();
+
     return Text.rich(
-      TextSpan(children: [
-        for (String s in brokenDown) ...[
-          if (highlighted.contains(s)) ...[
-            TextSpan(
-                text: s,
-                style: highlightedTextStyle,
-                recognizer: onTapRecognizer != null
-                    ? _getTapRecognizer(onTapRecognizer!)
-                    : null),
-          ] else ...[
-            TextSpan(text: s, style: mainStyle)
-          ]
-        ]
-      ]),
+      TextSpan(children: textSpans),
       textAlign: textAlign,
       key: const Key("highlighted"),
     );
   }
 
   String _findNextIndex(String remaining) {
-    int index = -1;
-    String word = 'not-to-detected-by-anything....!';
+    var index = -1;
+    var word = "not-to-detected-by-anything....!";
     for (var element in highlighted) {
       var found = remaining.indexOf(element);
       if (found != -1 && (found < index || index == -1)) {
@@ -59,66 +77,81 @@ class HighlightedText extends StatelessWidget {
     return word;
   }
 
-  List<String> _getHighlightedList(String remaining,
-      {List<String>? cumulative}) {
+  List<String> _getHighlightedList(
+    String remaining, {
+    List<String>? cumulative,
+  }) {
     cumulative ??= [];
-    String highlightedWord = _findNextIndex(remaining);
-    int nextIndex = remaining.indexOf(highlightedWord);
+
+    var highlightedWord = _findNextIndex(remaining);
+    var nextIndex = remaining.indexOf(highlightedWord);
+
     if (nextIndex == -1) {
       cumulative.add(remaining);
       return cumulative;
-    } else {
-      if (nextIndex != 0) {
-        String prefix = remaining.substring(0, nextIndex);
-        cumulative.add(prefix);
-      }
-      cumulative.add(highlightedWord);
-      return _getHighlightedList(
-          remaining.substring(nextIndex + highlightedWord.length),
-          cumulative: cumulative);
     }
+
+    if (nextIndex != 0) {
+      var prefix = remaining.substring(0, nextIndex);
+      cumulative.add(prefix);
+    }
+
+    cumulative.add(highlightedWord);
+
+    return _getHighlightedList(
+      remaining.substring(nextIndex + highlightedWord.length),
+      cumulative: cumulative,
+    );
   }
 }
 
+/// Widget for highlighting parts of a text in different ways.
 class MultiHighlightedText extends StatelessWidget {
-  final String text;
-  final List<HighlightModel> highlights;
-  final TextAlign? textAlign;
-  final TextStyle? mainStyle;
+  /// [MultiHighlightedText] constructor
   const MultiHighlightedText({
-    Key? key,
     required this.text,
     required this.highlights,
     required this.mainStyle,
+    super.key,
     this.textAlign,
-  }) : super(key: key);
+  });
+
+  /// The text
+  final String text;
+
+  /// A list of [HighlightModel]s
+  final List<HighlightModel> highlights;
+
+  /// The text alignment
+  final TextAlign? textAlign;
+
+  /// The default style
+  final TextStyle? mainStyle;
 
   @override
-  Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        children: [
-          ...getChildren(),
-        ],
-      ),
-      textAlign: textAlign,
-      key: const Key("highlighted"),
-    );
-  }
+  Widget build(BuildContext context) => Text.rich(
+        TextSpan(
+          children: [
+            ..._getChildren(),
+          ],
+        ),
+        textAlign: textAlign,
+        key: const Key("highlighted"),
+      );
 
-  List<InlineSpan> getChildren() {
-    List<String> brokenDown = _getHighlightedList(text);
+  List<InlineSpan> _getChildren() {
+    var brokenDown = _getHighlightedList(text);
 
-    List<InlineSpan> result = [];
+    var result = <InlineSpan>[];
 
-    for (String s in brokenDown) {
+    for (var substring in brokenDown) {
       var highlightFound = false;
       for (var highlight in highlights) {
-        if (highlight.highlightedTexts.contains(s) && !highlightFound) {
+        if (highlight.highlightedTexts.contains(substring) && !highlightFound) {
           highlightFound = true;
           result.add(
             TextSpan(
-              text: s,
+              text: substring,
               style: highlight.highlightStyle,
               recognizer: highlight.onTapRecognizer != null
                   ? _getTapRecognizer(highlight.onTapRecognizer!)
@@ -129,7 +162,7 @@ class MultiHighlightedText extends StatelessWidget {
       }
 
       if (!highlightFound) {
-        result.add(TextSpan(text: s, style: mainStyle));
+        result.add(TextSpan(text: substring, style: mainStyle));
       }
     }
 
@@ -137,8 +170,8 @@ class MultiHighlightedText extends StatelessWidget {
   }
 
   String _findNextIndex(String remaining) {
-    int index = -1;
-    String word = 'not-to-detected-by-anything....!';
+    var index = -1;
+    var word = "not-to-detected-by-anything....!";
     for (var highlight in highlights) {
       for (var element in highlight.highlightedTexts) {
         var found = remaining.indexOf(element);
@@ -151,23 +184,26 @@ class MultiHighlightedText extends StatelessWidget {
     return word;
   }
 
-  List<String> _getHighlightedList(String remaining,
-      {List<String>? cumulative}) {
+  List<String> _getHighlightedList(
+    String remaining, {
+    List<String>? cumulative,
+  }) {
     cumulative ??= [];
-    String highlightedWord = _findNextIndex(remaining);
-    int nextIndex = remaining.indexOf(highlightedWord);
+    var highlightedWord = _findNextIndex(remaining);
+    var nextIndex = remaining.indexOf(highlightedWord);
     if (nextIndex == -1) {
       cumulative.add(remaining);
       return cumulative;
     } else {
       if (nextIndex != 0) {
-        String prefix = remaining.substring(0, nextIndex);
+        var prefix = remaining.substring(0, nextIndex);
         cumulative.add(prefix);
       }
       cumulative.add(highlightedWord);
       return _getHighlightedList(
-          remaining.substring(nextIndex + highlightedWord.length),
-          cumulative: cumulative);
+        remaining.substring(nextIndex + highlightedWord.length),
+        cumulative: cumulative,
+      );
     }
   }
 }

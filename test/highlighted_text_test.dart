@@ -2,41 +2,44 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_iconica_utilities/flutter_iconica_utilities.dart';
-import 'package:flutter_iconica_utilities/src/highlighted_text/base.dart';
+import "package:flutter/material.dart";
+import "package:flutter_iconica_utilities/flutter_iconica_utilities.dart";
+import "package:flutter_test/flutter_test.dart";
 
 List<TextSpan> retrieveListOfSpans(WidgetTester tester) {
-  Text txt = tester.widget(find.byKey(const Key("highlighted")));
-  TextSpan ts = txt.textSpan as TextSpan;
-  List<TextSpan> result = [];
-  for (InlineSpan? span in ts.children!) {
-    result.add(span as TextSpan);
+  var text = tester.widget(find.byKey(const Key("highlighted"))) as Text;
+  var textSpan = text.textSpan! as TextSpan;
+  var result = <TextSpan>[];
+
+  for (InlineSpan? span in textSpan.children!) {
+    result.add(span! as TextSpan);
   }
+
   return result;
 }
 
-Map<int, Color> getColor(List<TextSpan> spans, String toTest) {
-  Map<int, Color> color = {};
-  for (int i = 0; i < spans.length; i++) {
-    if (spans[i].text == toTest) {
-      color[i] = (spans[i].style!.color!);
-    }
+Map<int, Color> getColor(List<TextSpan> textSpans, String toTest) {
+  var color = <int, Color>{};
+
+  for (var i = 0; i < textSpans.length; i++) {
+    if (textSpans[i].text != toTest) continue;
+
+    color[i] = textSpans[i].style!.color!;
   }
+
   return color;
 }
 
 void main() {
-  group('Highlighted text', () {
+  group("Highlighted text", () {
     testWidgets("One word color check", (tester) async {
-      String highlighted = "data";
-      String input = "data";
+      var highlighted = "data";
+      var input = "data";
 
       Color toTestColor = Colors.red;
-      List<int> indexesToTest = [0];
+      var indexesToTest = <int>[0];
 
-      HighlightedText text = Text(input).highlight(
+      var text = Text(input).highlight(
         [highlighted],
         highlightStyle: TextStyle(
           color: toTestColor,
@@ -48,8 +51,8 @@ void main() {
         ),
       );
 
-      List<TextSpan> spans = retrieveListOfSpans(tester);
-      Map<int, Color> colors = getColor(spans, highlighted);
+      var spans = retrieveListOfSpans(tester);
+      var colors = getColor(spans, highlighted);
       colors.forEach((key, value) {
         expect(indexesToTest.contains(key), equals(true));
         expect(value, equals(toTestColor));
@@ -57,13 +60,13 @@ void main() {
     });
 
     testWidgets("Four word color check", (tester) async {
-      String highlighted = "data";
-      String input = "test data test data";
+      var highlighted = "data";
+      var input = "test data test data";
 
       Color toTestColor = Colors.red;
-      List<int> indexesToTest = [1, 3];
+      var indexesToTest = <int>[1, 3];
 
-      HighlightedText text = Text(input).highlight(
+      var text = Text(input).highlight(
         [highlighted],
         highlightStyle: TextStyle(
           color: toTestColor,
@@ -75,8 +78,8 @@ void main() {
         ),
       );
 
-      List<TextSpan> spans = retrieveListOfSpans(tester);
-      Map<int, Color> colors = getColor(spans, highlighted);
+      var spans = retrieveListOfSpans(tester);
+      var colors = getColor(spans, highlighted);
       colors.forEach((key, value) {
         expect(indexesToTest.contains(key), equals(true));
         expect(value, equals(toTestColor));
@@ -84,14 +87,14 @@ void main() {
     });
 
     testWidgets("Long text color check", (tester) async {
-      String highlighted = "beautiful";
-      String input =
-          "Flutter is Google's UI toolkit for building beautiful, natively compiled applications for mobile, web, desktop, and embedded devices from a single codebase.";
+      var highlighted = "beautiful";
+      var input =
+          """Flutter is Google's UI toolkit for building beautiful, natively compiled applications for mobile, web, desktop, and embedded devices from a single codebase.""";
 
       Color toTestColor = Colors.red;
-      List<int> indexesToTest = [1];
+      var indexesToTest = <int>[1];
 
-      HighlightedText text = Text(input).highlight(
+      var text = Text(input).highlight(
         [highlighted],
         highlightStyle: TextStyle(
           color: toTestColor,
@@ -103,8 +106,8 @@ void main() {
         ),
       );
 
-      List<TextSpan> spans = retrieveListOfSpans(tester);
-      Map<int, Color> colors = getColor(spans, highlighted);
+      var spans = retrieveListOfSpans(tester);
+      var colors = getColor(spans, highlighted);
       colors.forEach((key, value) {
         expect(indexesToTest.contains(key), equals(true));
         expect(value, equals(toTestColor));
@@ -112,18 +115,19 @@ void main() {
     });
 
     testWidgets("Empty list should throw", (tester) async {
-      String input = "test data test data";
+      var input = "test data test data";
 
       Color toTestColor = Colors.red;
 
       expect(
-          () => Text(input).highlight(
-                [],
-                highlightStyle: TextStyle(
-                  color: toTestColor,
-                ),
-              ),
-          throwsAssertionError);
+        () => Text(input).highlight(
+          [],
+          highlightStyle: TextStyle(
+            color: toTestColor,
+          ),
+        ),
+        throwsAssertionError,
+      );
     });
   });
 }
