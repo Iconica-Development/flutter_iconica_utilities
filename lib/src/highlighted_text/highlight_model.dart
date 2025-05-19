@@ -1,11 +1,16 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
+/// The model used for highlighting pieces of text in different styles.
 class HighlightModel {
+  /// [HighlightModel] constructor
   HighlightModel(
     this.highlightedTexts, {
     required this.highlightStyle,
     this.onTapRecognizer,
-  }) : assert(highlightedTexts.isNotEmpty);
+  }) : assert(
+          highlightedTexts.isNotEmpty,
+          "highlightedTexts should not be empty",
+        );
 
   /// List of string which are going to be painted in the highlightStyle
   /// [AssertionError] gets thrown if the list is empty

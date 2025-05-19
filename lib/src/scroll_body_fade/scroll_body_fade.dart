@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 /// Creates edge fading for a scroll view.
 ///
@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 /// If you use this widget in combination with a horizontal scroll view, set
 /// the [axis] to [Axis.horizontal].
 class ScrollBodyFade extends StatefulWidget {
+  /// [ScrollBodyFade] constructor
   const ScrollBodyFade({
     required this.child,
     required this.controller,
@@ -100,42 +101,40 @@ class _ScrollBodyFadeState extends State<ScrollBodyFade> {
     required AlignmentGeometry begin,
     required AlignmentGeometry end,
     required Color fadeColor,
-  }) {
-    return Align(
-      alignment: relativePosition,
-      child: AnimatedBuilder(
-        animation: fade,
-        builder: (context, _) {
-          var length = fadeLength * fade.value;
-          var breadth = double.infinity;
+  }) =>
+      Align(
+        alignment: relativePosition,
+        child: AnimatedBuilder(
+          animation: fade,
+          builder: (context, _) {
+            var length = fadeLength * fade.value;
+            var breadth = double.infinity;
 
-          var size = switch (widget.axis) {
-            Axis.horizontal => Size(length, breadth),
-            Axis.vertical => Size(breadth, length),
-          };
+            var size = switch (widget.axis) {
+              Axis.horizontal => Size(length, breadth),
+              Axis.vertical => Size(breadth, length),
+            };
 
-          return IgnorePointer(
-            child: Container(
-              height: size.height,
-              width: size.width,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: begin,
-                  end: end,
-                  colors: [
-                    fadeColor,
-                    // TODO(Joey): migrate to flutter 3.27
-                    // ignore: deprecated_member_use
-                    fadeColor.withOpacity(0),
-                  ],
+            return IgnorePointer(
+              child: Container(
+                height: size.height,
+                width: size.width,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: begin,
+                    end: end,
+                    colors: [
+                      fadeColor,
+                      // ignore: deprecated_member_use
+                      fadeColor.withOpacity(0),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+            );
+          },
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +164,7 @@ class _ScrollBodyFadeState extends State<ScrollBodyFade> {
               end: endAlignment,
               fadeColor: fadeColor,
             ),
-          )
+          ),
         ],
         if (widget.endFadeLength != null) ...[
           Positioned.fill(

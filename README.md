@@ -1,4 +1,4 @@
-# Iconica utilities
+# Flutter Iconica utilities
 
 Small package that can be included in your app to access regularly used utility functions.
 
@@ -7,41 +7,15 @@ Small package that can be included in your app to access regularly used utility 
 To add this package in your project, add to your pubspec.yaml:
 
 ```yaml
-iconica_utilities:
-  git:
-    url: git@bitbucket.org:iconicadevs/iconica_utilities.git
-    ref: 0.0.4
+flutter_iconica_utilities:
+  hosted: https://forgejo.internal.iconica.nl/api/packages/internal/pub
+  version: ...
 ```
 
 ## Features
 
-[Bidirectional sorter](#Bidirectional%20Sorter)
-
 [Highlighted text](#Highlighted%20text)
 
-## Bidirectional Sorter
-
-Generic implementation of sorter for lists. It can sort primitive and complex objects, Both in descendig and ascending order. Can also sort multiple fields at the same time for complex objects using sortMulti
-
-### Usage
-
-```dart
-import 'package:iconica_utilities/iconica_utilities.dart';
-
-// Creating list of Strings
-List<String> listToSort = [];
-for (int i = 0; i < 10; i++) {
-    listToSort.add("name$i");
-}
-
-// Calling the sort method
-sort<String>(SortDirection.descending, listToSort);
-
-print(listToSort)
-
-// Returns
-[name9, name8, name7, name6, name5, name4, name3, name2, name1, name0]
-```
 
 ## Highlighted text
 

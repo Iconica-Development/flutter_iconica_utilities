@@ -1,5 +1,6 @@
-import 'package:flutter/widgets.dart';
+import "package:flutter/widgets.dart";
 
+/// Extension on [CrossFadeState] make alternating easier.
 extension CrossFadeStateBool on CrossFadeState {
   /// Returns the other crossfade state
   ///

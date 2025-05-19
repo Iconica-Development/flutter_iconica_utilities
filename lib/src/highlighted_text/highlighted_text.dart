@@ -2,16 +2,21 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 
-import 'package:flutter/material.dart';
-import 'package:flutter_iconica_utilities/src/highlighted_text/base.dart';
-import 'package:flutter_iconica_utilities/src/highlighted_text/highlight_model.dart';
+import "package:flutter/material.dart";
+import "package:flutter_iconica_utilities/src/highlighted_text/base.dart";
+import "package:flutter_iconica_utilities/src/highlighted_text/highlight_model.dart";
 
+/// An extension for highlighting pieces of text.
 extension Highlight on Text {
-  /// Generic implementation of highlighted text. this is an extension of the regular [Text] widget.
+  /// Generic implementation of highlighted text.
+  /// this is an extension on the regular [Text] widget.
   /// Which allows a different style for certain words of the text input.
-  /// Uses a [List] of [String] as highlight matchers, the words are going to be painted in the required [TextStyle] highlightStyle
-  /// Other text gets painted in the optional [TextStyle] mainStyle. If no style is given the inherited style is used.
-  /// [AssertionError] gets thrown when the given highlight matching [List] of [String] is empty.
+  /// Uses a [List] of [String] as highlight matchers, the words are
+  /// going to be painted in the required [TextStyle] highlightStyle
+  /// Other text gets painted in the optional [TextStyle] mainStyle.
+  /// If no style is given the inherited style is used.
+  /// [AssertionError] gets thrown when the given highlight
+  /// matching [List] of [String] is empty.
   /// ```
   /// ...
   /// child: Text('This is a text demo').highlight(
@@ -21,8 +26,10 @@ extension Highlight on Text {
   ///   ),
   /// ...
   /// ```
-  /// In the above example, the text 'This is a' and 'demo' will be painted use the default Text theme in black. But the word 'text' will be painted in the color red.
-  highlight(
+  /// In the above example, the text 'This is a' and 'demo' will be painted use
+  /// the default Text theme in black. But the word 'text' will be
+  /// painted in the color red.
+  HighlightedText highlight(
     /// List of string which are going to be painted in the highlightStyle
     /// [AssertionError] gets thrown if the list is empty
     List<String> highlights, {
@@ -32,12 +39,13 @@ extension Highlight on Text {
     /// Ability to set a tapRecognizer on the highlighted text.
     VoidCallback? onTapRecognizer,
 
-    /// Optional style, if no style given the inherited style is used. Words that are NOT highlighted get painted in this style.
+    /// Optional style, if no style given the inherited style is used. Words
+    /// that are *NOT* highlighted get painted in this style.
     TextStyle? mainStyle,
   }) {
-    assert(highlights.isNotEmpty);
+    assert(highlights.isNotEmpty, "highlights should not be empty");
     return HighlightedText(
-      text: data ?? '',
+      text: data ?? "",
       highlighted: highlights,
       highlightedTextStyle: highlightStyle,
       mainStyle: mainStyle ?? style,
@@ -46,16 +54,18 @@ extension Highlight on Text {
     );
   }
 
-  multiHighlight(
+  /// Method for highlighting multiple pieces of text in different ways.
+  MultiHighlightedText multiHighlight(
     /// List of Highlights which are going to be painted in the highlightStyle
     /// [AssertionError] gets thrown if the list is empty
     List<HighlightModel> highlights, {
-    /// Optional style, if no style given the inherited style is used. Words that are NOT highlighted get painted in this style.
+    /// Optional style, if no style given the inherited style is used.
+    /// Words that are NOT highlighted get painted in this style.
     TextStyle? mainStyle,
   }) {
-    assert(highlights.isNotEmpty);
+    assert(highlights.isNotEmpty, "highlights should not be empty");
     return MultiHighlightedText(
-      text: data ?? '',
+      text: data ?? "",
       highlights: highlights,
       mainStyle: mainStyle ?? style,
       textAlign: textAlign,
